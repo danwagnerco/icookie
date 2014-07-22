@@ -1,3 +1,0 @@
-== iCookie
-
-Weather to email app, hunks need not apply.

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  REPORT_OPTIONS = %w(Full Temps-Only)
+  REPORT_OPTIONS = %w(full temps-only)
 
   validates :first_name, :last_name, :presence => true
   validates :email, :format => {

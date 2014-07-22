@@ -8,9 +8,11 @@
 
 require "csv"
 
+file = File.join(Rails.root, "lib", "assets", "free-zip-code-database.csv")
+
 namespace :import_locations_csv do
   task :create_locations => :environment do
-    CSV.foreach("../lib/assets/free-zip-code-database.csv", :headers => true) do |row|
+    CSV.foreach(file, :headers => true) do |row|
         h             = {}
         h[:zip]       = row[0].to_s
         h[:state]     = row[1].to_s

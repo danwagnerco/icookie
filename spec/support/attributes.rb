@@ -4,6 +4,6 @@ def user_attributes(overrides = {})
     :last_name     => "Wagner",
     :email         => "danwagnerco@gmail.com",
     :zip           => "60642",
-    :report_detail => "Full"
+    :report_detail => "full"
   }.merge(overrides)
 end

@@ -35,10 +35,30 @@ describe "User" do
       expect(u.errors[:report_detail].any?).to be_true
     end
 
-    it "accepts a valid email"
-    it "accepts a valid zip"
-    it "accepts any report detail in the list"
-    it "is valid with example attributes"
-    
+    it "accepts a valid email" do
+      u = User.new(:email => "valid.email@subdomain.address.com")
+      u.valid?
+      expect(u.errors[:email].any?).to be_false
+    end
+
+    it "accepts a valid zip" do
+      u = User.new(:zip => "00501")
+      u.valid?
+      expect(u.errors[:zip].any?).to be_false
+    end
+
+    it "accepts any report detail in the list" do
+      options = %w[Full Temps-Only]
+      options.each do |option|
+        u = User.new(:report_detail => option.downcase)
+        u.valid?
+        expect(u.errors[:report_detail].any?).to be_false
+      end
+    end
+
+    it "is valid with example attributes" do
+      u = User.new(user_attributes)
+      expect(u.valid?).to be_true
+    end
   end
 end

@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Icookie::Application.config.secret_key_base = '3c0a7dc7e6dbfb7c48c77e8ed5e9be0cd0a1d72349bd2a57949ba2520b46bc409269503c036df751e6159cc34ce735abe801488b5b49c67df560613e917a0a44'
+Icookie::Application.config.secret_key_base = CONFIG[:secret_token]

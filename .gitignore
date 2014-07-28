@@ -16,4 +16,4 @@
 /tmp
 
 # Ignore application yaml containing secret constants
-/config/application.yml
+/config/application.yaml

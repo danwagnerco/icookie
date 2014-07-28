@@ -14,5 +14,5 @@ Yahtzee!
 Make a copy of application.example.yaml and populate it with the secret stuff.
 
 #### TODO
-* move api key, secret token etc. into application yaml file (http://railscasts.com/episodes/85-yaml-configuration-revised)
 * update location model to send forecast_io calls
+* create form to update user model

@@ -16,4 +16,3 @@ Make a copy of application.example.yaml and populate it with the secret stuff.
 #### TODO
 * build a wrapper model for forecast_io (call it ForecastInterface ?)
 * update location model to use ForecastInterface
-* create a nicer url route for the sign in page

@@ -3,7 +3,7 @@ require_relative("../spec_helper")
 describe "Creating a new user" do
 	context "bad input to form" do
 		it "error on blank first name" do
-			visit new_user_url
+			visit signup_url # new_user_url
 			
 			fill_in "user[first_name]", :with => ""
 			fill_in "user[last_name]",  :with => "Last"
@@ -16,7 +16,7 @@ describe "Creating a new user" do
 		end
 
 		it "error on blank last name" do
-			visit new_user_url
+			visit signup_url
 
 			fill_in "user[first_name]", :with => "First"
 			fill_in "user[last_name]",  :with => ""
@@ -29,7 +29,7 @@ describe "Creating a new user" do
 		end
 
 		it "error on too-short zip code" do
-			visit new_user_url
+			visit signup_url
 
 			fill_in "user[first_name]", :with => "First"
 			fill_in "user[last_name]",  :with => "Last"
@@ -42,7 +42,7 @@ describe "Creating a new user" do
 		end
 
 		it "error on too-long zip code" do
-			visit new_user_url
+			visit signup_url
 
 			fill_in "user[first_name]", :with => "First"
 			fill_in "user[last_name]",  :with => "Last"
@@ -55,7 +55,7 @@ describe "Creating a new user" do
 		end
 
 		it "error on non-digit zip code" do
-			visit new_user_url
+			visit signup_url
 
 			fill_in "user[first_name]", :with => "First"
 			fill_in "user[last_name]",  :with => "Last"
@@ -68,7 +68,7 @@ describe "Creating a new user" do
 		end
 
 		it "error on email missing dot whatever" do
-			visit new_user_url
+			visit signup_url
 
 			fill_in "user[first_name]", :with => "First"
 			fill_in "user[last_name]",  :with => "Last"
@@ -86,7 +86,7 @@ describe "Creating a new user" do
 			visit root_url
 			click_on "Sign Me Up!"
 
-			expect(current_path).to eql(new_user_path)
+			expect(current_path).to eql(signup_path)
 
 			fill_in "user[first_name]", :with => "First"
 			fill_in "user[last_name]",  :with => "Last"

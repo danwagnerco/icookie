@@ -29,6 +29,12 @@ describe "User" do
       expect(u.errors[:zip].any?).to be_true
     end
 
+    it "requires only digits in zip" do
+      u = User.new(:zip => "abcde")
+      u.valid?
+      expect(u.errors[:zip].any?).to be_true
+    end
+
     it "requires a valid report detail" do
       u = User.new(:report_detail => "")
       u.valid?
@@ -48,7 +54,7 @@ describe "User" do
     end
 
     it "accepts any report detail in the list" do
-      options = %w[Full Temps-Only]
+      options = %w[full partial]
       options.each do |option|
         u = User.new(:report_detail => option.downcase)
         u.valid?

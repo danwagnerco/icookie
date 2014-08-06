@@ -1,0 +1,12 @@
+<%= bootstrap_form_for(@user) do |f| %>
+  <%= f.text_field :first_name %>
+  <%= f.text_field :last_name %>
+  <%= f.text_field :zip, :placeholder => "Must be 6 digits long" %>
+  <%= f.email_field :email, :value => "name@example.com" %>
+    <%= f.form_group :report_detail, :label => { :text => "Report Detail" } do %>
+    <%= f.radio_button :report_detail, "full", :label => "The Whole Enchilada", :checked => true, :inline => true %>
+    <%= f.radio_button :report_detail, "partial", :label => "Temperatures Only", :inline => true %>
+  <% end %>
+<%= f.submit "Sign Up", :class => "btn btn-success" %>
+<%= link_to "Cancel", root_path %>
+<% end %>

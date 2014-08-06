@@ -14,4 +14,9 @@ class User < ActiveRecord::Base
   validates :report_detail, :inclusion => {:in => REPORT_OPTIONS}
   
   belongs_to :location
+
+  def self.unique_zip_codes
+    self.uniq.pluck(:zip)
+  end
+
 end

@@ -1,70 +1,146 @@
 require_relative("../spec_helper")
 
 describe "User" do
-  # before do
-  # end
 
-  context "validation" do
+  context "validation check" do
     it "requires a first name" do
-      u = User.new(:first_name => "")
-      u.valid?
-      expect(u.errors[:first_name].any?).to be_true
+      u = User.new(:first_name            => "",
+                   :last_name             => "Wagner",
+                   :email                 => "dan@example.com",
+                   :zip                   => "12345",
+                   :report_detail         => "full",
+                   :password              => "secret",
+                   :password_confirmation => "secret"
+                  )
+      expect(u.valid?).to be_false
     end
 
     it "requires a last name" do
-      u = User.new(:last_name => "")
-      u.valid?
-      expect(u.errors[:last_name].any?).to be_true
+      u = User.new(:first_name            => "Dan",
+                   :last_name             => "",
+                   :email                 => "dan@example.com",
+                   :zip                   => "12345",
+                   :report_detail         => "full",
+                   :password              => "secret",
+                   :password_confirmation => "secret"
+                  )
+      expect(u.valid?).to be_false
+    end
+
+    it "requires an email" do
+      u = User.new(:first_name            => "Dan",
+                   :last_name             => "Wagner",
+                   :email                 => "",
+                   :zip                   => "12345",
+                   :report_detail         => "full",
+                   :password              => "secret",
+                   :password_confirmation => "secret"
+                  )
+      expect(u.valid?).to be_false
     end
 
     it "requires a valid email" do
-      u = User.new(:email => "gorb@cincoboy")
-      u.valid?
-      expect(u.errors[:email].any?).to be_true
+      u = User.new(:first_name            => "Dan",
+                   :last_name             => "Wagner",
+                   :email                 => "dan@example",
+                   :zip                   => "12345",
+                   :report_detail         => "full",
+                   :password              => "secret",
+                   :password_confirmation => "secret"
+                  )
+      expect(u.valid?).to be_false
     end
 
-    it "requires a valid zip" do
-      u = User.new(:zip => "333")
-      u.valid?
-      expect(u.errors[:zip].any?).to be_true
+    it "requires a zip code" do
+      u = User.new(:first_name            => "Dan",
+                   :last_name             => "Wagner",
+                   :email                 => "dan@example.com",
+                   :zip                   => "",
+                   :report_detail         => "full",
+                   :password              => "secret",
+                   :password_confirmation => "secret"
+                  )
+      expect(u.valid?).to be_false
     end
 
-    it "requires only digits in zip" do
-      u = User.new(:zip => "abcde")
-      u.valid?
-      expect(u.errors[:zip].any?).to be_true
+    it "requires a 5-digit zip code" do
+      u = User.new(:first_name            => "Dan",
+                   :last_name             => "Wagner",
+                   :email                 => "dan@example",
+                   :zip                   => "333",
+                   :report_detail         => "full",
+                   :password              => "secret",
+                   :password_confirmation => "secret"
+                  )
+      expect(u.valid?).to be_false
     end
 
-    it "requires a valid report detail" do
-      u = User.new(:report_detail => "")
-      u.valid?
-      expect(u.errors[:report_detail].any?).to be_true
+    it "requires only digits in zip code" do
+      u = User.new(:first_name            => "Dan",
+                   :last_name             => "Wagner",
+                   :email                 => "dan@example",
+                   :zip                   => "abcde",
+                   :report_detail         => "full",
+                   :password              => "secret",
+                   :password_confirmation => "secret"
+                  )
+      expect(u.valid?).to be_false
     end
 
-    it "accepts a valid email" do
-      u = User.new(:email => "valid.email@subdomain.address.com")
-      u.valid?
-      expect(u.errors[:email].any?).to be_false
+    it "requires a password" do
+      u = User.new(:first_name            => "Dan",
+                   :last_name             => "Wagner",
+                   :email                 => "dan@example",
+                   :zip                   => "12345",
+                   :report_detail         => "full",
+                   :password              => "",
+                   :password_confirmation => ""
+                  )
+      expect(u.valid?).to be_false
     end
 
-    it "accepts a valid zip" do
-      u = User.new(:zip => "00501")
-      u.valid?
-      expect(u.errors[:zip].any?).to be_false
+    it "requires password and confirmation match" do
+      u = User.new(:first_name            => "Dan",
+                   :last_name             => "Wagner",
+                   :email                 => "dan@example",
+                   :zip                   => "12345",
+                   :report_detail         => "full",
+                   :password              => "secret",
+                   :password_confirmation => "not secret"
+                  )
+      expect(u.valid?).to be_false
     end
 
-    it "accepts any report detail in the list" do
-      options = %w[full partial]
-      options.each do |option|
-        u = User.new(:report_detail => option.downcase)
-        u.valid?
-        expect(u.errors[:report_detail].any?).to be_false
-      end
+    it "requires a report detail" do
+      u = User.new(:first_name            => "Dan",
+                   :last_name             => "Wagner",
+                   :email                 => "dan@example",
+                   :zip                   => "12345",
+                   :report_detail         => "",
+                   :password              => "secret",
+                   :password_confirmation => "secret"
+                  )
+      expect(u.valid?).to be_false
     end
 
-    it "is valid with example attributes" do
+    it "requires report detail to be full or partial" do
+      u = User.new(:first_name            => "Dan",
+                   :last_name             => "Wagner",
+                   :email                 => "dan@example",
+                   :zip                   => "12345",
+                   :report_detail         => "other",
+                   :password              => "secret",
+                   :password_confirmation => "secret"
+                  )
+      expect(u.valid?).to be_false
+    end
+  end
+
+  context "successful validations" do
+    it "creates a user with the user_attributes" do
       u = User.new(user_attributes)
       expect(u.valid?).to be_true
     end
   end
+
 end

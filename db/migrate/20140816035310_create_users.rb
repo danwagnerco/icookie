@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email
       t.string :zip
       t.string :report_detail
+      t.string :password_digest
       t.references :location, index: true
 
       t.timestamps

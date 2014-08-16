@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140722051456) do
+ActiveRecord::Schema.define(version: 20140816035849) do
 
   create_table "locations", force: true do |t|
     t.string   "zip"
@@ -30,9 +30,11 @@ ActiveRecord::Schema.define(version: 20140722051456) do
     t.string   "email"
     t.string   "zip"
     t.string   "report_detail"
+    t.string   "password_digest"
     t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin",           default: false
   end
 
   add_index "users", ["location_id"], name: "index_users_on_location_id"

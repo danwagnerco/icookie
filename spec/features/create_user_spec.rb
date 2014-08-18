@@ -107,8 +107,9 @@ describe "Creating a new user" do
       choose("The Whole Enchilada")
       click_on "Sign Up"
 
-      expect(page).to have_text("You're in!")
       expect(current_path).to eql(success_path)
+      expect(page).to have_text("Signup Successful!")
+      expect(page).to have_text("You're in!")
     end
   end
   

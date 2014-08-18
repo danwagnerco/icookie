@@ -2,13 +2,17 @@
   <%= f.text_field :first_name %>
   <%= f.text_field :last_name %>
   <%= f.text_field :zip, :placeholder => "Must be 5 digits long" %>
-  <%= f.email_field :email, :value => "name@example.com" %>
+  <%= f.email_field :email, :placeholder => "name@example.com" %>
   <%= f.password_field :password %>
   <%= f.password_field :password_confirmation, :label => "Confirm Your Password" %>
     <%= f.form_group :report_detail, :label => { :text => "Report Detail" } do %>
     <%= f.radio_button :report_detail, "full", :label => "The Whole Enchilada", :checked => true, :inline => true %>
     <%= f.radio_button :report_detail, "partial", :label => "Temperatures Only", :inline => true %>
   <% end %>
-<%= f.submit "Sign Up", :class => "btn btn-success" %>
+  <% if @user.new_record? %>
+    <%= f.submit "Sign Up", :class => "btn btn-success" %>
+  <% else %>
+    <%= f.submit "Update Account", :class => "btn btn-success" %>
+  <% end %>
 <%= link_to "Cancel", root_path %>
 <% end %>

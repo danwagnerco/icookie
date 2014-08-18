@@ -13,7 +13,7 @@ describe "User sign in" do
       click_button "Sign In"
 
       expect(current_path).to eql(user_path(@user))
-      expect(page).to have_text("Welcome back, #{@user.name}!")
+      expect(page).to have_text("Welcome back #{@user.first_name}!")
     end
 
     it "shows sign out in nav" do
@@ -29,7 +29,7 @@ describe "User sign in" do
       sign_in(@user)
       click_button "Sign In"
 
-      expect(page).to have_link("#{@user.name}")
+      expect(page).to have_link("#{@user.first_name}")
     end
 
     it "shows account settings in nav" do
@@ -59,7 +59,15 @@ describe "User sign in" do
   end
 
   context "unsuccessfully" do
-    it "redirects a bad sign in"
+    it "redirects a bad sign in" do
+      visit signin_url
+      fill_in "email",    :with => "fakedude@fake.com"
+      fill_in "password", :with => "whitewine"
+      click_button "Sign In"
+
+      expect(current_path).to eql(session_path)
+      expect(page).to have_text("Invalid email/password combination!")
+    end
   end
 
 end

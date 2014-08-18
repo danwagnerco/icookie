@@ -20,8 +20,17 @@ class User < ActiveRecord::Base
     }
   validates :report_detail, :inclusion => {:in => REPORT_OPTIONS}
 
+  def self.authenticate(email, password)
+    user = User.find_by(:email => email)
+    user && user.authenticate(password)
+  end
+
   def self.unique_zip_codes
     self.uniq.pluck(:zip)
+  end
+
+  def gravatar_id
+    Digest::MD5::hexdigest(email.downcase)
   end
 
 end

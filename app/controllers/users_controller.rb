@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
-  # before_action :require_signin, :only => [:show]
-  # before_action :require_correct_user, :only => [:show]
+  before_action :require_signin, :only => [:show, :edit, :update, :destroy]
+  before_action :require_correct_user, :only => [:show, :edit, :update, :destroy]
 
   def show
-    @user = User.find(params[:id])
   end
 
   def new
@@ -21,11 +20,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to @user, :success => "Account Successfully Updated!"
     else
@@ -34,7 +31,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(parans[:id])
     @user.destroy
     session[:user_id] = nil
     redirect_to root_url, :success => "Account Successfully Deleted!"
@@ -47,9 +43,9 @@ private
                                  :password, :password_confirmation, :report_detail)
   end
 
-  # def require_correct_user
-  #   @user = User.find(params[:id])
-  #   redirect_to root_url unless current_user?(@user)
-  # end
+  def require_correct_user
+    @user = User.find(params[:id])
+    redirect_to root_url unless current_user?(@user)
+  end
 
 end

@@ -4,6 +4,9 @@ describe "User sign out" do
   it "shows the root after signing out" do
     u = User.create!(user_attributes)
     sign_in(u)
+
+    expect(current_path).to eql(user_path(User.last))
+
     click_link "Sign Out"
 
     expect(current_path).to eql(root_path)

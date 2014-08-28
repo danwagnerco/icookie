@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  belongs_to :location
+  has_secure_password
+
   REPORT_OPTIONS = %w(full partial)
 
   validates :first_name, :last_name, :presence => true
@@ -16,11 +19,18 @@ class User < ActiveRecord::Base
       :message => "zip code must contain digits only" 
     }
   validates :report_detail, :inclusion => {:in => REPORT_OPTIONS}
-  
-  belongs_to :location
+
+  def self.authenticate(email, password)
+    user = User.find_by(:email => email)
+    user && user.authenticate(password)
+  end
 
   def self.unique_zip_codes
     self.uniq.pluck(:zip)
+  end
+
+  def gravatar_id
+    Digest::MD5::hexdigest(email.downcase)
   end
 
 end

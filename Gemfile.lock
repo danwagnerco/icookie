@@ -28,6 +28,7 @@ GEM
     arel (4.0.2)
     autoprefixer-rails (2.1.1.20140710)
       execjs
+    bcrypt (3.1.7)
     bootstrap-sass (3.2.0.0)
       sass (~> 3.2)
     bootstrap_form (2.1.1)
@@ -137,6 +138,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
+  bcrypt (= 3.1.7)
   bootstrap-sass (~> 3.2.0)
   bootstrap_form
   capybara (= 2.1.0)

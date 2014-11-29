@@ -1,29 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>iCookie</title>
-    <%= stylesheet_link_tag "application", media: "all",
-                                              "data-turbolinks-track" => true %>
+    <title>The Cookie Report</title>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
   </head>
   <body>
-    <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li><%= link_to "About", about_path %></li>
-          <li><%= link_to "Contact", contact_path %></li>
-          <% if current_user %>
-            <li><%= link_to current_user.first_name, current_user %></li>
-            <li><%= link_to "Account Settings", edit_user_path(current_user) %></li>
-            <li><%= link_to "Sign Out", session_path, :method => :delete %></li>
-          <% else %>
-            <li><%= link_to "Sign In", signin_path %></li>
-          <% end %>
-        </ul>
-        <h3 class="text-muted"><%= link_to "The Cookie Report", root_path %></h3>
-      </div>
-    </div>
+    <%= render :partial => "shared/header" %>
     <div class="container">
       <%= render :partial => "shared/flash_messages", :flash => flash %>
       <%= yield %>

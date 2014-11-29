@@ -17,3 +17,11 @@
 
 # Ignore application yaml containing secret constants
 /config/application.yml
+
+# Vim ignore settings
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
